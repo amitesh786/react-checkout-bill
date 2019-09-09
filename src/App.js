@@ -1,33 +1,18 @@
 import React from 'react';
-import './App.css';
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import CardActions from '@material-ui/core/CardActions';
-
-import AddressForm from './pages/AddressForm/index';
 import Checkout from './pages/Checkout/index';
+import NoMatchForm from './pages/NoMatchForm/index';
+import PageUnderConstruction from './pages/PageUnderConstruction/index';
 
 function App() {
   return (
-      <Grid container spacing={2}>
-
-        <Grid item sm={6} md={4} className="app-item">
-          <Card className="app-card">
-            <CardMedia>
-                <AddressForm />
-            </CardMedia>
-          </Card>
-        </Grid>
-        <CardActions>
-              <Button href={Checkout} size="small" color="primary">
-                    Next
-              </Button>
-        </CardActions>
-      
-    </Grid>
+    <Switch>
+        <Route exact path="/" component={() => (<Redirect to='/payment' />)} />
+        <Route path="/payment" component={ Checkout } />
+        <Route path="/page" component={ PageUnderConstruction } />
+        <Route component={ NoMatchForm } />
+    </Switch>
   );
 }
 
