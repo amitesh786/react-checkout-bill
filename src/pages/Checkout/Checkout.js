@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
+
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -92,6 +94,10 @@ export default function Checkout() {
         setActiveStep(activeStep - 1);
     };
 
+    const handlePayment = () => {
+        setActiveStep(activeStep - 3);
+    }
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -119,12 +125,20 @@ export default function Checkout() {
                         {activeStep === steps.length ? (
                         <React.Fragment>
                             <Typography variant="h5" gutterBottom>
-                            Thank you for your order.
+                                Thank you for your order.
                             </Typography>
                             <Typography variant="subtitle1">
-                            Your order number is #2001539. We have emailed your order confirmation, and will
-                            send you an update when your order has shipped.
+                                Your order number is #2001539. We have emailed your order confirmation, and will
+                                send you an update when your order has shipped.
                             </Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handlePayment}
+                                className={classes.button}
+                            >
+                            {activeStep === steps.length - 1 ? 'Place order' : 'Payment'}
+                            </Button>
                         </React.Fragment>
                         ) : (
                         <React.Fragment>
