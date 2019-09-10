@@ -6,11 +6,13 @@ import NoMatchForm from './pages/NoMatchForm/index';
 import PageUnderConstruction from './pages/PageUnderConstruction/index';
 
 import Dashboard from './dashboad/Dashboard/index';
+import SignIn from './signin/SignIn/index';
 
 function App() {
   return (
     <Switch>
-        <Route exact path="/" component={() => (<Redirect to='/payment' />)} />
+        <Route path="/signin" component={ SignIn } />
+        <Route exact path="/" component={() => (<Redirect to='/signin' />)} />
         <Route path="/payment" component={ Checkout } />
         <Route path="/dashboard" component={ Dashboard } />
         <Route path="/page" component={ PageUnderConstruction } />

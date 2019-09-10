@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,24 +9,12 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+
 import AddressForm from '../AddressForm/index';
 import PaymentForm from '../PaymentForm/index';
 import Review from '../Review/index';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-                <Link color="inherit" href="https://github.com/amitesh786/">
-                    Your Website
-                </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import CopyRight from '../../common/CopyRight/index';
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -162,7 +149,7 @@ export default function Checkout() {
                         )}
                     </React.Fragment>
                 </Paper>
-                <Copyright />
+                <CopyRight />
             </main>
         </React.Fragment>
     );

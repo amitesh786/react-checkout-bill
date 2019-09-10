@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -13,27 +14,16 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+
 import { mainListItems, secondaryListItems } from '../listItems/listItems';
 import Chart from '../Chart/index';
 import Deposits from '../Deposits/index';
 import Orders from '../Orders/index';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-                <Link color="inherit" href="https://github.com/amitesh786/">
-                    Your Website
-                </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import CopyRight from '../../common/CopyRight/index';
 
 const drawerWidth = 240;
 
@@ -194,7 +184,7 @@ export default function Dashboard() {
                         </Grid>
                     </Grid>
                 </Container>
-                <Copyright />
+                <CopyRight />
             </main>
         </div>
     );
