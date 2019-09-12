@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function PageUnderConstruction() {
-    return (
-        <React.Fragment>
-            <img 
-                src="../../../assets/img/notmatch.png"
-                alt="under construction"
-            />
-        </React.Fragment>       
-    );
+class PageUnderConstruction extends Component {
+
+    render() {
+        return (
+            <React.Fragment>
+                <img 
+                    src="../../../assets/img/notmatch.png"
+                    alt="under construction"
+                />
+            </React.Fragment>       
+        );
+    }    
 }
+
+export default PageUnderConstruction;

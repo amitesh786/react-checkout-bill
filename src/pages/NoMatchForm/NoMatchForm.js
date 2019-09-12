@@ -1,5 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
@@ -26,15 +28,26 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function NoMatchForm() {
-    const classes = useStyles();
-    return (
-        <main className={classes.layout}>
-            <Paper className={classes.paper}>
-                <Typography component="h1" variant="h4" align="center">
-                    Page not found
-                </Typography>
-            </Paper>
-        </main>
-    );
+class NoMatchForm extends Component {
+
+    render() {
+        let classes = this.props;
+
+        return (
+            <main className={classes.layout}>
+                <Paper className={classes.paper}>
+                    <Typography component="h1" variant="h4" align="center">
+                        Page not found
+                    </Typography>
+                </Paper>
+            </main>
+        );
+    }    
 }
+
+
+NoMatchForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(useStyles)(NoMatchForm);

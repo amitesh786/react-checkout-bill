@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -50,107 +51,127 @@ const useStyles = makeStyles(theme => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
-    },
+    }
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+class Checkout extends Component {
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-        return <AddressForm />;
-        case 1:
-        return <PaymentForm />;
-        case 2:
-        return <Review />;
-        default:
-        throw new Error('Unknown step');
-    }
-}
+    constructor() {
+        super();
 
-export default function Checkout() {
+        let steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-    const classes = useStyles();
-    const [ activeStep, setActiveStep ] = React.useState(0);
+        function getStepContent(step) {
+            switch (step) {
+                case 0:
+                return <AddressForm />;
+                case 1:
+                return <PaymentForm />;
+                case 2:
+                return <Review />;
+                default:
+                throw new Error('Unknown step');
+            }
+        }
 
-    const handleNext = () => {
-        setActiveStep(activeStep + 1);
-    };
+        this.state = {
+            steps: steps,
+            getStepContent: getStepContent()
+        }
 
-    const handleBack = () => {
-        setActiveStep(activeStep - 1);
-    };
-
-    const handlePayment = () => {
-        setActiveStep(activeStep - 3);
     }
 
-    return (
-        <React.Fragment>
-            <CssBaseline />
-            <AppBar position="absolute" color="default" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap className={classes.textCustom}>
-                        Payment gateway
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+    render() {
+        let classes = this.props;
+        
+        let [ activeStep, setActiveStep ] = React.useState(0);
 
-            <main className={classes.layout}>
-                <Paper className={classes.paper}>
-                    <Typography component="h1" variant="h4" align="center">
-                        Checkout
-                    </Typography>
-                    <Stepper activeStep={activeStep} className={classes.stepper}>
-                        {steps.map(label => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                        ))}
-                    </Stepper>
-                    <React.Fragment>
-                        {activeStep === steps.length ? (
+        let handleNext = () => {
+            setActiveStep(activeStep + 1);
+        };
+
+        let handleBack = () => {
+            setActiveStep(activeStep - 1);
+        };
+
+        let handlePayment = () => {
+            setActiveStep(activeStep - 3);
+        }
+
+        return (
+            <React.Fragment>
+                <CssBaseline />
+                <AppBar position="absolute" color="default" className={classes.appBar}>
+                    <Toolbar>
+                        <Typography variant="h6" color="inherit" noWrap className={classes.textCustom}>
+                            Payment gateway
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+    
+                <main className={classes.layout}>
+                    <Paper className={classes.paper}>
+                        <Typography component="h1" variant="h4" align="center">
+                            Checkout
+                        </Typography>
+                        <Stepper activeStep={activeStep} className={classes.stepper}>
+                            {this.state.steps.map(label => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                            ))}
+                        </Stepper>
                         <React.Fragment>
-                            <Typography variant="h5" gutterBottom>
-                                Thank you for your order.
-                            </Typography>
-                            <Typography variant="subtitle1">
-                                Your order number is #2001539. We have emailed your order confirmation, and will
-                                send you an update when your order has shipped.
-                            </Typography>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handlePayment}
-                                className={classes.button}
-                            >
-                            {activeStep === steps.length - 1 ? 'Place order' : 'Payment'}
-                            </Button>
-                        </React.Fragment>
-                        ) : (
-                        <React.Fragment>
-                            {getStepContent(activeStep)}
-                            <div className={classes.buttons}>
-                            {activeStep !== 0 && (
-                                <Button onClick={handleBack} className={classes.button}>
-                                Back
+                            {activeStep === this.state.steps.length ? (
+                            <React.Fragment>
+                                <Typography variant="h5" gutterBottom>
+                                    Thank you for your order.
+                                </Typography>
+                                <Typography variant="subtitle1">
+                                    Your order number is #2001539. We have emailed your order confirmation, and will
+                                    send you an update when your order has shipped.
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handlePayment}
+                                    className={classes.button}
+                                >
+                                {activeStep === this.state.steps.length - 1 ? 'Place order' : 'Payment'}
                                 </Button>
+                            </React.Fragment>
+                            ) : (
+                            <React.Fragment>
+                                {this.state.getStepContentgetStepContent(activeStep)}
+                                <div className={classes.buttons}>
+                                {activeStep !== 0 && (
+                                    <Button onClick={handleBack} className={classes.button}>
+                                    Back
+                                    </Button>
+                                )}
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleNext}
+                                    className={classes.button}
+                                >
+                                    {activeStep === this.state.steps.length - 1 ? 'Place order' : 'Next'}
+                                </Button>
+                                </div>
+                            </React.Fragment>
                             )}
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleNext}
-                                className={classes.button}
-                            >
-                                {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                            </Button>
-                            </div>
                         </React.Fragment>
-                        )}
-                    </React.Fragment>
-                </Paper>
-                <CopyRight />
-            </main>
-        </React.Fragment>
-    );
+                    </Paper>
+                    <CopyRight />
+                </main>
+            </React.Fragment>
+        );
+
+    }
 }
+
+Checkout.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(useStyles)(Checkout);
