@@ -19,8 +19,7 @@
         "@material-ui/icons": "4.2.1",
         "json-server": "0.15.1",
         "react-router-dom": "5.0.1",
-        "recharts": "1.7.1",
-        "video-react": "^0.14.1"
+        "recharts": "1.7.1"
     },
     "scripts": {
         "start:json-server": "node ./server/server.js",
